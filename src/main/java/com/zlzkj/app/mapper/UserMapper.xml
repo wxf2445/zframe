@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zlzkj.app.mapper.UserMapper" >
+  <resultMap id="BaseResultMap" type="com.zlzkj.app.model.User" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="avatar" property="avatar" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="role_id" property="roleId" jdbcType="VARCHAR" />
+    <result column="is_deleted" property="isDeleted" jdbcType="BOOLEAN" />
+    <result column="is_locked" property="isLocked" jdbcType="BOOLEAN" />
+    <result column="last_ip" property="lastIp" jdbcType="VARCHAR" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="created_time" property="createdTime" jdbcType="TIMESTAMP" />
+    <result column="updated_time" property="updatedTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    id,name,username,password,avatar,phone,email,role_id,is_deleted,is_locked,last_ip,description,address,created_time,updated_time
+  </sql>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from x_user
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zlzkj.app.model.User" >
+    <selectKey resultType="java.lang.String" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into x_user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null">id,</if>
+      <if test="name != null">name,</if>
+      <if test="username != null">username,</if>
+      <if test="password != null">password,</if>
+      <if test="avatar != null">avatar,</if>
+      <if test="phone != null">phone,</if>
+      <if test="email != null">email,</if>
+      <if test="address != null">address,</if>
+      <if test="roleId != null">role_id,</if>
+      <if test="description != null">description,</if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null">#{id},</if>
+      <if test="name != null">#{name},</if>
+      <if test="username != null">#{username},</if>
+      <if test="password != null">#{password},</if>
+      <if test="avatar != null">#{avatar},</if>
+      <if test="phone != null">#{phone},</if>
+      <if test="email != null">#{email},</if>
+      <if test="address != null">#{address},</if>
+      <if test="roleId != null">#{roleId},</if>
+      <if test="description != null">#{description},</if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.zlzkj.app.model.User" >
+    update x_user
+    <set >
+      <if test="name != null">name = #{name,jdbcType=VARCHAR},</if>
+      <if test="password != null">password = #{password,jdbcType=VARCHAR},</if>
+      <if test="avatar != null">avatar = #{avatar,jdbcType=VARCHAR},</if>
+      <if test="phone != null">phone = #{phone,jdbcType=VARCHAR},</if>
+      <if test="email != null">email = #{email,jdbcType=VARCHAR},</if>
+      <if test="address != null">address = #{address,jdbcType=VARCHAR},</if>
+      <if test="isDeleted != null">is_deleted = #{isDeleted,jdbcType=VARCHAR},</if>
+      <if test="isLocked != null">is_locked = #{isLocked,jdbcType=VARCHAR},</if>
+      <if test="roleId != null">role_id = #{roleId,jdbcType=VARCHAR},</if>
+      <if test="lastIP != null">last_ip = #{lastIp,jdbcType=VARCHAR},</if>
+      <if test="description != null">description = #{description,jdbcType=VARCHAR},</if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from x_user
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="selectByUserName" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from x_user
+    where username = #{username,jdbcType=VARCHAR}
+  </select>
+</mapper>

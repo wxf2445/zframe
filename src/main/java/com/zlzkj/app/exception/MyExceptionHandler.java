@@ -1,0 +1,63 @@
+package com.zlzkj.app.exception;
+
+import com.alibaba.fastjson.JSONObject;
+import org.apache.shiro.authz.AuthorizationException;
+import org.apache.shiro.authz.UnauthenticatedException;
+import org.apache.shiro.authz.UnauthorizedException;
+import org.apache.shiro.session.UnknownSessionException;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.web.servlet.HandlerExceptionResolver;
+import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.HashMap;
+import java.util.Map;
+
+/**
+ * Created by ZJUXP on 2016-03-24.
+ */
+public class MyExceptionHandler implements HandlerExceptionResolver {
+
+    public ModelAndView resolveException(HttpServletRequest request, HttpServletResponse response, Object handler,
+                                         Exception ex) {
+        Map<String, Object> model = new HashMap<String, Object>();
+
+        model.put("ex", ex);
+
+        // ���ݲ�ͬ����ת��ͬҳ��
+        if (ex instanceof UnauthenticatedException) {
+            return new ModelAndView("redirect:/login", model);
+        } else if (ex instanceof AuthorizationException || ex instanceof UnauthorizedException) {
+            if ("XMLHttpRequest".equals(request.getHeader("x-requested-with"))) {
+                try {
+                    response.setStatus(HttpStatus.OK.value()); //设置状态码
+                    response.setContentType(MediaType.APPLICATION_JSON_VALUE); //设置ContentType
+                    response.setCharacterEncoding("UTF-8"); //避免乱码
+                    response.setHeader("Cache-Control", "no-shiro, must-revalidate");
+                    PrintWriter writer = response.getWriter();
+                    model.put("hasNoPermission",true);
+                    JSONObject jsonObject = new JSONObject(model);
+                    writer.write(jsonObject.toJSONString());
+                    writer.print(jsonObject.toJSONString());
+                    writer.flush();
+                    return new ModelAndView("", model);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                return new ModelAndView("redirect:/nonauthorize", model);
+            }
+        } else if (ex instanceof UnknownSessionException) {
+        	System.out.println(2);
+            return new ModelAndView("redirect:/login", model);
+        }
+        return null;
+    }
+}
+
+
+//~ Formatted by Jindent --- http://www.jindent.com

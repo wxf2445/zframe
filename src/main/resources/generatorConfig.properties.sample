@@ -1,0 +1,7 @@
+projectName=zframe-mybatis
+
+jdbc.connector=/Users/Simon/mysql-connector-java-5.1.31.jar
+jdbc.driverClass=com.mysql.jdbc.Driver
+jdbc.url=jdbc:mysql://127.0.0.1:3306/zframe?tinyInt1isBit=false
+jdbc.username=root
+jdbc.password=123456789
