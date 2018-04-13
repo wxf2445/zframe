@@ -1,9 +1,12 @@
 package com.zlzkj.app.service;
 
 import java.util.List;
+import java.util.Map;
 
+import com.zlzkj.app.util.Page;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,6 +20,9 @@ import com.zlzkj.core.util.Fn;
 @Service
 @Transactional
 public class UserService {
+
+	@Value("${page.size}")
+	private int PAGE_SIZE;
 
 	@Autowired
 	private UserMapper mapper;
@@ -48,29 +54,14 @@ public class UserService {
 	public List<User> findByRoleId(String roleId){
 		return mapper.selectByRoleId(roleId);
 	}
-	
-	public List<Row> findAllBySQL(){
-		
-		String sql = SQLBuilder.getSQLBuilder(User.class)
-				.fields("*")
-				.selectSql();
-		
-		//System.out.println("sql==="+sql);
-		
-		return sqlRunner.select(sql,1);
+
+	public List<User> findByMap(Map<String,Object> map){
+		return mapper.selectByMap(map);
 	}
-	
-	
-	public boolean login(String account,String password){
-		if(account.equals(""))return false;
-		if(password.equals(""))return false;
-		String sql="select * from x_user where username = '"+account + "' and password = '"+password+"'";
-		if(sqlRunner.select(sql,1).size()>0)
-			return true;
-		else
-			return false;
+
+	public Page findByMap(Map<String,Object> parmMap,int nowPage){
+		return new Page(findByMap(parmMap),mapper.countByMap(parmMap),nowPage,PAGE_SIZE);
 	}
-	
 	
 }
 

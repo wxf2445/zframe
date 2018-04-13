@@ -96,5 +96,8 @@
       </library>
     </orderEntry>
     <orderEntry type="library" name="kaptcha-2.3.2" level="project" />
+    <orderEntry type="library" name="commons-lang-2.5" level="project" />
+    <orderEntry type="library" name="commons-beanutils-1.8.3" level="project" />
+    <orderEntry type="library" name="commons-lang" level="project" />
   </component>
 </module>
