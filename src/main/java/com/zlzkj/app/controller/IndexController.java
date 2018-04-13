@@ -6,8 +6,10 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 //import org.json.JSONObject;
+import com.google.code.kaptcha.Constants;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
@@ -21,21 +23,27 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.zlzkj.app.service.UserService;
 import com.zlzkj.core.base.BaseController;
 import com.zlzkj.core.sql.Row;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class IndexController extends BaseController{
-	
+
 	@Autowired
 	private UserService userService;
 
-	@RequestMapping(value={"/","/login"})
+	@RequestMapping(value={"/"})
 	public String login(Model model,HttpServletRequest request,HttpServletResponse response) {
+		Subject user = SecurityUtils.getSubject();
+		if(user.isRemembered()||user.isAuthenticated()){
+			return "index/index";
+		}
+
 		return "index/login";
 	}
 
 	@RequestMapping(value={"/nonauthority"})
 	public String nonauthority(Model model,HttpServletRequest request,HttpServletResponse response) {
-		return "index/login";
+		return "redirect:/";
 	}
 
 	@RequiresPermissions(value = {"delete_file"})
@@ -58,7 +66,9 @@ public class IndexController extends BaseController{
 	}
 
 	@RequestMapping(value={"login/login"})
-	public String login(Model model,HttpServletRequest request,HttpServletResponse response,String account,String password) {
+	public String login(Model model,HttpServletRequest request,HttpServletResponse response,HttpSession session,
+						String account,String password,boolean rememberMe,String submitCode,
+						final RedirectAttributes redirectAttributes) {
 
 		Subject user = SecurityUtils.getSubject();
 
@@ -69,15 +79,33 @@ public class IndexController extends BaseController{
          */
 		UsernamePasswordToken token = new UsernamePasswordToken(account, password);
 
-		//token.setRememberMe(rememberMe);
+		token.setRememberMe(rememberMe);
+		String code = (String) session.getAttribute(Constants.KAPTCHA_SESSION_KEY);
+		if(!submitCode.equals(code)){
+			redirectAttributes.addFlashAttribute("errors", "submit_code_error");
+			return "redirect:/";
+		}
 		try {
 			user.login(token);
 			System.out.println("Login success!");
-			return "index/index";
+		} catch (AuthenticationException e) {
+			redirectAttributes.addFlashAttribute("errors", "account_or_password_error");
+			//e.printStackTrace();
+		}
+		return "redirect:/";
+	}
+	@RequestMapping(value={"logout"})
+	public String logout() {
+
+		Subject user = SecurityUtils.getSubject();
+
+		try {
+			user.logout();
+			System.out.println("Logout success!");
 		} catch (AuthenticationException e) {
 			e.printStackTrace();
-			return "index/login";
 		}
+		return "redirect:/";
 	}
 	
 }
