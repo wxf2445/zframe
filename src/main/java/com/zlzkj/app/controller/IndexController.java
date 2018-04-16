@@ -2,13 +2,13 @@ package com.zlzkj.app.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 //import org.json.JSONObject;
+import com.alibaba.fastjson.JSONObject;
 import com.google.code.kaptcha.Constants;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
@@ -16,17 +16,20 @@ import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.zlzkj.app.service.UserService;
 import com.zlzkj.core.base.BaseController;
-import com.zlzkj.core.sql.Row;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class IndexController extends BaseController{
+
+	@Value("${PAGE_SIZE}")
+	private int PAGE_SIZE;
 
 	@Autowired
 	private UserService userService;
@@ -51,7 +54,7 @@ public class IndexController extends BaseController{
 	public void test2(Model model,HttpServletRequest request,HttpServletResponse response) throws IOException {
 		
 		PrintWriter out = response.getWriter();  
-		List<Row> userList = userService.findAllBySQL();
+		/*List<Row> userList = userService.findAllBySQL();*/
 		/*JSONObject jo = new JSONObject();
 		jo.put("all_user", userList);
 
@@ -107,5 +110,16 @@ public class IndexController extends BaseController{
 		}
 		return "redirect:/";
 	}
-	
+
+	@RequestMapping(value={"/json/nonauthority"})
+	public String jsonNonauthority(Model model,HttpServletRequest request,HttpServletResponse response) {
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("hasNoPermission",true);
+		return ajaxReturn(response, jsonObject,"",-1);
+	}
+
+	@RequestMapping(value={"/error/404"})
+	public String error404(Model model,HttpServletRequest request,HttpServletResponse response) {
+		return "error/404";
+	}
 }

@@ -21,7 +21,7 @@ import java.util.Map;
 @Transactional
 @Service
 public class BackupService {
-    @Value("${page.size}")
+    @Value("${PAGE_SIZE}")
     private int PAGE_SIZE;
     @Value("${FILE_REPOSITORY}")
     private String fileServerPath;

@@ -7,6 +7,10 @@
     <result column="code" property="code" jdbcType="VARCHAR" />
     <result column="description" property="description" jdbcType="VARCHAR" />
   </resultMap>
+
+  <sql id="Base_Column_List">
+    id,name,code,description
+  </sql>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from x_role
     where id = #{id,jdbcType=VARCHAR}

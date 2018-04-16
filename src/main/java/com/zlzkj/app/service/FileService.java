@@ -20,7 +20,7 @@ import java.io.InputStream;
 public class  FileService {
     @Resource
     private ShiroUserService shiroUserService;
-    @Value("${fileserverpath}")
+    //@Value("${fileserverpath}")
     private String ROOT_PATH;
 
     public void writeTxt(String content, String path) throws IOException {

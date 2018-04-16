@@ -26,32 +26,24 @@ public class MyExceptionHandler implements HandlerExceptionResolver {
 
         model.put("ex", ex);
 
-        // ���ݲ�ͬ����ת��ͬҳ��
         if (ex instanceof UnauthenticatedException) {
-            return new ModelAndView("redirect:/login", model);
+            return new ModelAndView("redirect:/", model);
         } else if (ex instanceof AuthorizationException || ex instanceof UnauthorizedException) {
             if ("XMLHttpRequest".equals(request.getHeader("x-requested-with"))) {
                 try {
-                    response.setStatus(HttpStatus.OK.value()); //设置状态码
+                    response.setStatus(403); //设置状态码
                     response.setContentType(MediaType.APPLICATION_JSON_VALUE); //设置ContentType
                     response.setCharacterEncoding("UTF-8"); //避免乱码
                     response.setHeader("Cache-Control", "no-shiro, must-revalidate");
-                    PrintWriter writer = response.getWriter();
-                    model.put("hasNoPermission",true);
-                    JSONObject jsonObject = new JSONObject(model);
-                    writer.write(jsonObject.toJSONString());
-                    writer.print(jsonObject.toJSONString());
-                    writer.flush();
-                    return new ModelAndView("", model);
-                } catch (IOException e) {
+                    return new ModelAndView("redirect:/json/nonauthority", model);
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             } else {
                 return new ModelAndView("redirect:/nonauthorize", model);
             }
         } else if (ex instanceof UnknownSessionException) {
-        	System.out.println(2);
-            return new ModelAndView("redirect:/login", model);
+            return new ModelAndView("redirect:/", model);
         }
         return null;
     }

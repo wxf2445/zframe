@@ -21,7 +21,7 @@ import com.zlzkj.core.util.Fn;
 @Transactional
 public class UserService {
 
-	@Value("${page.size}")
+	@Value("${PAGE_SIZE}")
 	private int PAGE_SIZE;
 
 	@Autowired

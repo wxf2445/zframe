@@ -4,10 +4,9 @@
 <html>
 <head>
     <title>zlzkj</title>
-    <link href="${__static__}/css/font-awesome.min.css" rel="stylesheet">
+    <link href="${__static__}/css/skin/font-awesome.css" rel="stylesheet">
     <link href="${__static__}/css/bootstrap.min.css" rel="stylesheet">
     <link href="${__static__}/css/templatemo-style.css" rel="stylesheet">
-    <![endif]-->
     <script type="text/javascript" src="${__static__}/js/jquery-1.9.0.js"></script>
 
     <script !src="">
@@ -48,8 +47,7 @@
 <body class="light-gray-bg">
 <div class="templatemo-content-widget templatemo-login-widget white-bg">
     <header class="text-center">
-        <div class="square"></div>
-        <h1>致良知科技登录</h1>
+        <h1><img src="${__static__}/images/skin/small_logo.png" width="30" height="30" style="margin-top: -5px">&nbsp;鼎研WMS仓储管理系统登录</h1>
     </header>
     <c:if test="${errors != null}">
         <div class="alert-danger login-error-div">
@@ -62,13 +60,13 @@
         <div class="form-group">
             <div class="input-group">
                 <div class="input-group-addon"><i class="fa fa-user fa-fw"></i></div>
-                <input type="text" class="form-control" id="account" placeholder="账号">
+                <input type="text" class="form-control" name="account" placeholder="账号">
             </div>
         </div>
         <div class="form-group">
             <div class="input-group">
                 <div class="input-group-addon"><i class="fa fa-key fa-fw"></i></div>
-                <input type="password" class="form-control" id="password" placeholder="******">
+                <input type="password" class="form-control" name="password" placeholder="******">
             </div>
         </div>
         <div class="form-group">
@@ -84,7 +82,7 @@
             </div>
         </div>
         <div class="form-group">
-            <input type="checkbox" id="rememberMe" name="rememberMe"/>
+            <input type="checkbox" id="rememberMe" name="rememberMe" value="1"/>
             <label for="rememberMe"><span style="font-weight: normal">记住密码</span></label>
         </div>
         <div class="form-group">
@@ -95,7 +93,6 @@
 </div>
 <%--<div class="templatemo-content-widget templatemo-login-widget templatemo-register-widget white-bg">
 </div>--%>
-</body>
-
+<script src="//cdn.bootcss.com/canvas-nest.js/1.0.1/canvas-nest.min.js"></script>
 </body>
 </html>

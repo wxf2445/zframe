@@ -1,5 +1,7 @@
 package com.zlzkj.app.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 public class User {
@@ -29,6 +31,7 @@ public class User {
 
     private Date createdTime;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date updatedTime;
 
     private Date lastLogin;

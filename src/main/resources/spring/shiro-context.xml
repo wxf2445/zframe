@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-               xmlns="http://www.springframework.org/schema/beans"
-               xsi:schemaLocation="
-		http://www.springframework.org/schema/beans
-		http://www.springframework.org/schema/beans/spring-beans-4.1.xsd">
+       xmlns="http://www.springframework.org/schema/beans" xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-4.1.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 <!-- 缓存管理器 使用Ehcache实现 -->
 <!--<bean id="shiroCacheManager" class="org.apache.shiro.shiro.MemoryConstrainedCacheManager">
 </bean>-->
 
+    <context:property-placeholder location="classpath:config.properties" />
 <!--缓存管理器 使用Ehcache实现-->
 <!--<bean id="shiroCacheManager" class="org.apache.shiro.shiro.ehcache.EhCacheManager">
     <property name="cacheManagerConfigFile" value="classpath:ehcache.xml"/>
@@ -89,7 +89,7 @@
     <property name="securityManager" ref="securityManager"/>
     <property name="loginUrl" value="/"/>
     <property name="successUrl" value="/index"/>
-    <property name="unauthorizedUrl" value="/nonauthorize"/>
+    <!--<property name="unauthorizedUrl" value="/nonauthorize"/>-->
     <property name="filterChainDefinitions">
         <value>
             /static/** =anon
