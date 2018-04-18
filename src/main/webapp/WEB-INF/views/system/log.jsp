@@ -33,7 +33,7 @@
         <div id="reportview"></div>
 
         <footer class="text-right">
-            <p>Copyright &copy; HangZhou ZhiLiangZhi Tech
+            <p>Copyright &copy; HangZhou DingYan Tech
                 | 杭州鼎研科技科技有限公司版权所有</p>
         </footer>
     </div>

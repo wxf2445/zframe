@@ -104,5 +104,7 @@
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-databind:bundle:2.4.0" level="project" />
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.4.0" level="project" />
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-core:2.4.0" level="project" />
+    <orderEntry type="library" name="json" level="project" />
+    <orderEntry type="library" name="core-3.1.0" level="project" />
   </component>
 </module>

@@ -92,33 +92,14 @@
     <!--<property name="unauthorizedUrl" value="/nonauthorize"/>-->
     <property name="filterChainDefinitions">
         <value>
+            /user/** = anon
             /static/** =anon
             /nonauthorize = anon
-            /dwr/** = anon
-            /druid/** = user
-            /findpassword/**=anon
-            /home/** = anon
-            /solutiondetail/** = anon
-            /json/register/** = anon
-            /json/user/** = anon
-            /json/siteMail/**=anon
-            /json/server/**=anon
-            /mail/** = anon
-            /siteEmail/**=anon
-            <!-- /server/**=anon-->
             /login/** = anon
             /logout = logout
             /register/** = anon
             /Kaptcha.jpg = anon
-            /resources/**= anon
-            /api/** = anon
-            /user/** = anon
             /error/** = anon
-            /setPassword = anon
-            /reRegister = anon
-            /validatorCode =anon
-            /setPwd/**=anon
-            /admin/**=anon
             /** = user
         </value>
     </property>

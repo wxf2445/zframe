@@ -120,6 +120,10 @@
 	transition: border .2s linear
 }
 
+.jquery-accordion-menu li ul.submenu a.active{
+	background: #2D5FA0;
+}
+
 .jquery-accordion-menu ul ul.submenu li:hover>a {
 	border-left-color: #414956
 }

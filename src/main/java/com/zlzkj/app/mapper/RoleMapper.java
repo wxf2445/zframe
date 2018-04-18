@@ -3,6 +3,7 @@ package com.zlzkj.app.mapper;
 
 import com.zlzkj.app.model.Role;
 import com.zlzkj.app.model.User;
+import com.zlzkj.core.sql.Row;
 
 import java.util.List;
 import java.util.Map;
@@ -16,7 +17,8 @@ public interface RoleMapper {
 
     int updateByPrimaryKey(Role record);
 
-    List<User> selectByMap(Map<String,Object> map);
+
+    List<Row> selectByMap(Map<String,Object> map);
 
     int countByMap(Map<String,Object> map);
 }

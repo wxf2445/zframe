@@ -5,4 +5,8 @@
 <!-- 	<typeAliases>
 		<typeAlias alias="row" type="com.zlzkj.core.sql.Row" />
 	</typeAliases> -->
+    <settings>
+        <!-- 打印查询语句 -->
+        <setting name="logImpl" value="STDOUT_LOGGING" />
+    </settings>
 </configuration>

@@ -15,10 +15,10 @@
 
     <title>WMS仓储管理系统</title>
 
-    <link href="${__static__}/css/skin/default.css" rel="stylesheet">
     <link href="${__static__}/css/bootstrap.min.css" rel="stylesheet">
     <link href="${__static__}/css/styles.css" rel="stylesheet" type="text/css"/>
     <link href="${__static__}/css/skin/jquery-accordion-menu.css" rel="stylesheet" type="text/css"/>
+    <link href="${__static__}/css/skin/default.css" rel="stylesheet">
     <link href="${__static__}/css/skin/font-awesome.css" rel="stylesheet">
 </head>
 
@@ -31,7 +31,7 @@
         <div id="jquery-accordion-menu" class="jquery-accordion-menu blue">
             <div class="jquery-accordion-menu-header" id="form"></div>
             <ul id="demo-list">
-                <li class="active"><a href="javascript:void(0);"><i class="fa fa-home"></i>Home </a></li>
+                <li><a href="javascript:void(0);"><i class="fa fa-home"></i>首页 </a></li>
                 <li><a href="javascript:void(0);"><i class="fa fa-glass"></i>仓库管理 </a>
                     <ul class="submenu">
                         <li><a href="javascript:void(0);">仓库管理 </a></li>
@@ -48,7 +48,7 @@
                         <li><a href="javascript:void(0);">出库作业 </a></li>
                     </ul>
                 </li>
-                <li><a href="javascript:void(0);"><i class="fa fa-home"></i>库存服务管理 </a>
+                <li><a href="javascript:void(0);"><i class="fa fa-home"></i>库存管理 </a>
                     <ul class="submenu">
                         <li><a href="javascript:void(0);">货物库存查询</a></li>
                         <li><a href="javascript:void(0);">货物库位查询</a></li>
@@ -130,20 +130,17 @@
 </div>
 <!-- JS -->
 <script src="${__static__}/js/bootstrap.min.js"></script>
-<script src="${__static__}/js/jquery.tmpl.js"></script>
-<script src="${__static__}/js/jquery.validate.js"></script>
-<script src='${__static__}/js/messages_zh.js '></script>
-<script src='${__static__}/js/noty/jquery.noty.js'></script>
+<%--<script src='${__static__}/js/noty/jquery.noty.js'></script>
 <script src='${__static__}/js/noty/layouts/topCenter.js'></script>
-<script src='${__static__}/js/noty/themes/default.js'></script>
+<script src='${__static__}/js/noty/themes/default.js'></script>--%>
 <script src='${__static__}/js/skin/jquery-accordion-menu.js'></script>
 
 <script type="text/javascript"
         src="http://api.map.baidu.com/api?v=2.0&ak=6vxe6wNIoVzqpbyAmGxYUkiobfmSyWs8"></script>
 <script type="text/javascript">
     $(function () {
-        jQuery("#jquery-accordion-menu").jqueryAccordionMenu();
 
+        jQuery("#jquery-accordion-menu").jqueryAccordionMenu();
 
         $(".jquery-accordion-menu li a").off('click').on("click",function(){
             $(".jquery-accordion-menu li a.active").removeClass("active");

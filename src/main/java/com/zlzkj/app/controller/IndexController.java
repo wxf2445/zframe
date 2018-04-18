@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 //import org.json.JSONObject;
 import com.alibaba.fastjson.JSONObject;
 import com.google.code.kaptcha.Constants;
+import com.zlzkj.app.util.Md5Util;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
@@ -75,12 +76,7 @@ public class IndexController extends BaseController{
 
 		Subject user = SecurityUtils.getSubject();
 
-        /*
-         * if (user.isAuthenticated()) {
-         *       user.logout();
-         * }
-         */
-		UsernamePasswordToken token = new UsernamePasswordToken(account, password);
+		UsernamePasswordToken token = new UsernamePasswordToken(account, Md5Util.getMD5(account+password));
 
 		token.setRememberMe(rememberMe);
 		String code = (String) session.getAttribute(Constants.KAPTCHA_SESSION_KEY);

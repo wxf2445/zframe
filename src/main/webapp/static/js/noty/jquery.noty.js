@@ -11,14 +11,15 @@
 
 if (typeof Object.create !== 'function') {
 	Object.create = function (o) {
-        function F() {
-        }
-        F.prototype = o;
+		function F() {};
+		F.prototype = o;
 		return new F();
 	};
-}
-(function ($) {
-    var NotyObject = {
+};
+
+;(function($) {
+
+	var NotyObject = {
 
 		init: function(options) {
 
@@ -161,7 +162,7 @@ if (typeof Object.create !== 'function') {
 					// Layout Cleaning
 					$.notyRenderer.setLayoutCountFor(self, -1);
 					if ($.notyRenderer.getLayoutCountFor(self) == 0) $(self.options.layout.container.selector).remove();
-
+					if(self.$bar!=null)
 					self.$bar.remove();
 					self.$bar = null;
 					self.closed = true;
@@ -384,7 +385,7 @@ function noty(options) {
 		'onShown': 'callback.afterShow',
 		'onClose': 'callback.onClose',
 		'onClosed': 'callback.afterClose'
-	};
+	}
 
 	jQuery.each(options, function(key, value) {
 		if (old_to_new[key]) {

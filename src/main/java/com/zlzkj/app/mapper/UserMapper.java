@@ -1,6 +1,8 @@
 package com.zlzkj.app.mapper;
 
 import com.zlzkj.app.model.User;
+import com.zlzkj.core.sql.Row;
+
 import java.util.List;
 import java.util.Map;
 
@@ -15,7 +17,7 @@ public interface UserMapper {
 
     List<User> selectByRoleId(String roleId);
 
-    List<User> selectByMap(Map<String,Object> map);
+    List<Row> selectByMap(Map<String,Object> map);
 
     int countByMap(Map<String,Object> map);
 

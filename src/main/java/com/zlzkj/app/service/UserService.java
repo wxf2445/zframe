@@ -3,6 +3,8 @@ package com.zlzkj.app.service;
 import java.util.List;
 import java.util.Map;
 
+import com.zlzkj.app.util.IDGenerator;
+import com.zlzkj.app.util.Md5Util;
 import com.zlzkj.app.util.Page;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +41,8 @@ public class UserService {
 	}
 	
 	public Integer save(User entity) {
-		
+		entity.setId(IDGenerator.generator());
+		entity.setPassword(Md5Util.getMD5(entity.getUsername()+entity.getPassword()));
 		return mapper.insert(entity);
 	}
 	
@@ -55,11 +58,14 @@ public class UserService {
 		return mapper.selectByRoleId(roleId);
 	}
 
-	public List<User> findByMap(Map<String,Object> map){
+	public List<Row> findByMap(Map<String,Object> map){
 		return mapper.selectByMap(map);
 	}
 
-	public Page findByMap(Map<String,Object> parmMap,int nowPage){
+	public Page findByMap(Map<String,Object> parmMap,Integer nowPage){
+		if(nowPage == null) nowPage = 1;
+		parmMap.put("start",(nowPage-1)*PAGE_SIZE);
+		parmMap.put("end",PAGE_SIZE);
 		return new Page(findByMap(parmMap),mapper.countByMap(parmMap),nowPage,PAGE_SIZE);
 	}
 	

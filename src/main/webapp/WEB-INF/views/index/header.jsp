@@ -21,7 +21,7 @@
                             class="username"><shiro:principal/></span>
                         <span class="caret"></span>
                     </a>
-                    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1" style="margin-left: 40px">
+                    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1" style="margin-left: -10px">
                         <li role="presentation">
                             <a role="menuitem" tabindex="-1" href="javascript:updateUser()">修改个人信息</a>
                         </li>
@@ -31,12 +31,7 @@
                         </li>
                     </ul>
                 </div>
-                <%--<div class="profile-photo-overlay"></div>--%>
             </div>
-            <%--
-            <a href="${z:u('logout')}">
-                <i class="icon-logout"></i>
-            </a>--%>
         </div>
         <div class="user_avatar">
             <img src="https://gss0.bdstatic.com/70cFsj3f_gcX8t7mm9GUKT-xh_/avatar/100/r7s1g1.gif"/>

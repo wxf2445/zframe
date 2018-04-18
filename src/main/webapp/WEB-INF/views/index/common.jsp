@@ -5,16 +5,21 @@
 <head>
     <base href="<%=basePath%>">
     <title>common</title>
-    <script type="text/javascript" src="${__static__}/js/jquery-latest.js"></script>
+
+    <script src="${__static__}/js/fancybox/lib/jquery-1.8.2.min.js"></script>
     <script type="text/javascript" src="${__static__}/js/common/common.js"></script>
+    <%-- button loading--%>
+    <script src="${__static__}/js/button/bootstrap-tooltip.js"></script>
+    <script src="${__static__}/js/button/bootstrap-popover.js"></script>
+    <script src="${__static__}/js/button/bootstrap-button.js"></script>
 
 </head>
 <style>
     body {
         margin: 0 auto;
         padding: 0;
-        font-size: 14px;
-        color: #666;
+        font-size: 12px;
+        color: #404040;
         font-family: "Lucida Grande", Verdana, Lucida, Helvetica, Arial, "寰蒋闆呴粦" ,sans-serif;
     }
 </style>
@@ -40,12 +45,22 @@
             }
         }
     });
+    $(document).on("click",".checkall",function () {
+        var all_checkbox = $("input[type=checkbox]");
+        for (i = 0; i < all_checkbox.length; i++) {
+            if (!all_checkbox.eq(i).prop("checked")) {
+                $("input[type=checkbox]").prop("checked", true);
+                return;
+            }
+        }
+        $("input[type=checkbox]").prop("checked",false);
+    })
 </script>
 
 
 <div class="modal fade" id="commonModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
      aria-hidden="true">
-    <div class="modal-dialog" style="width:800px;">
+    <div class="modal-dialog" style="width:700px;">
         <div class="modal-content">
 
         </div>

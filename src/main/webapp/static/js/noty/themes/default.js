@@ -134,9 +134,8 @@
 					this.$bar.css({backgroundColor: '#FFEAA8', borderColor: '#FFC237', color: '#826200'}); 
 					this.$buttons.css({borderTop: '1px solid #FFC237'}); break;
 				case 'error':
-					this.$bar.css({backgroundColor: 'red', borderColor: 'darkred', color: '#FFF'});
-					this.$message.css({fontWeight: 'bold'}); 
-					this.$buttons.css({borderTop: '1px solid darkred'}); break;
+					this.$bar.css({backgroundColor: '#d9534f', borderColor: '#d43f3a', color: '#FFF'});
+					this.$buttons.css({borderTop: '1px solid #d43f3a'}); break;
 				case 'information':
 					this.$bar.css({backgroundColor: '#57B7E2', borderColor: '#0B90C4', color: '#FFF'}); 
 					this.$buttons.css({borderTop: '1px solid #0B90C4'}); break;

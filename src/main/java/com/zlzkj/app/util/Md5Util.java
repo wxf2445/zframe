@@ -66,6 +66,12 @@ public class Md5Util {
 
         return md5str;
     }
+
+    public static void main(String[] args) {
+        System.out.println("==========>>>>>>");
+        System.out.println(getMD5("superadmin123"));
+        System.out.println("==========>>>>>>");
+    }
 }
 
 

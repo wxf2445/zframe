@@ -54,7 +54,7 @@
     from x_role
   </select>
 
-  <select id="selectByMap" resultMap="BaseResultMap" parameterType="map" >
+  <select id="selectByMap"  resultType="com.zlzkj.core.sql.Row" parameterType="map" >
     select
     <include refid="Base_Column_List" />
     from x_role
@@ -63,7 +63,7 @@
     </where>
   </select>
 
-  <select id="countByMap" resultMap="BaseResultMap" parameterType="map" >
+  <select id="countByMap"  resultType="java.lang.Integer" parameterType="map" >
     select
     <include refid="Base_Column_List" />
     from x_role
