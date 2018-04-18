@@ -9,6 +9,8 @@ import java.util.Map;
 public interface UserMapper {
     int deleteByPrimaryKey(String id);
 
+    int deleteByMap(Map<String,Object> map);
+
     int insert(User record);
 
     User selectByPrimaryKey(String id);

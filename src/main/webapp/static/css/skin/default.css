@@ -159,6 +159,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 }
 .zlzkj_footer{
 	padding: 4px;
+	text-align: center;
 }
 .tag-success{
 	color: #3c763d;
@@ -218,4 +219,10 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 	background-color: #4a89dc;
 	border-color: #5a9aef;
 	vertical-align: middle;
+}
+.templatemo-content-widget{
+	min-height:85%
+}
+#ids-form{
+	margin-bottom: 0;
 }

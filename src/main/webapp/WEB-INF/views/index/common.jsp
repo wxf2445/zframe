@@ -3,7 +3,6 @@
 <%@ taglib uri="http://zlzkj.com/tags" prefix="z" %>
 <html>
 <head>
-    <base href="<%=basePath%>">
     <title>common</title>
 
     <script src="${__static__}/js/fancybox/lib/jquery-1.8.2.min.js"></script>
@@ -24,10 +23,9 @@
     }
 </style>
 <script>
-    $.ajaxSetup({
+    /*$.ajaxSetup({
         contentType:"application/x-www-form-urlencoded;charset=utf-8",
         complete:function(XMLHttpRequest,textStatus){
-
             //通过XMLHttpRequest取得响应结果
             var res = XMLHttpRequest.responseText;
             try{
@@ -42,9 +40,10 @@
                     //正常情况就不统一处理了
                 }
             }catch(e){
+                console.log(e);
             }
         }
-    });
+    });*/
     $(document).on("click",".checkall",function () {
         var all_checkbox = $("input[type=checkbox]");
         for (i = 0; i < all_checkbox.length; i++) {

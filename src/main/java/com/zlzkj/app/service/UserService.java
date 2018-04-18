@@ -1,5 +1,6 @@
 package com.zlzkj.app.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -34,6 +35,11 @@ public class UserService {
 	
 	public Integer delete(String id){
 		return mapper.deleteByPrimaryKey(id);
+	}
+	public Integer deletebyIds(String[]id){
+		Map parmMap = new HashMap();
+		parmMap.put("ids",id);
+		return mapper.deleteByMap(parmMap);
 	}
 	
 	public Integer update(User entity){

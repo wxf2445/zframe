@@ -30,74 +30,76 @@
                         <input type="hidden" name="nowPage">
                         <div class="zlzkj_tool_bar">
                             <div class="zlzkj_left_tool_bar">
-                                <input placeholder="用户名称">
+                                <input placeholder="用户名称" name="keyword">
                                 <select name="isLocked" class="status_choose">
                                     <option value="">全部</option>
-                                    <option value="1">启用</option>
-                                    <option value="-1">禁用</option>
+                                    <option value="0">启用</option>
+                                    <option value="1">禁用</option>
                                 </select>
-                                <a class="createUser btn btn-primary btm-sm"><i class="fa fa-search fa-fw"></i>搜索</a>
+                                <a class="searchUser btn btn-primary btm-sm"><i class="fa fa-search fa-fw"></i>搜索</a>
                             </div>
                             <div class="zlzkj_right_tool_bar">
                                 <a class="createUser btn btn-primary btm-sm"><i class="fa fa-plus fa-fw"></i>添加</a>
-                                <a class="deleteUser btn btn-danger btm-sm"><i class="fa fa-trash-o fa-fw"></i>删除</a>
+                                <a class="batchDeleteUser btn btn-danger btm-sm"><i
+                                        class="fa fa-trash-o fa-fw"></i>删除</a>
                             </div>
                         </div>
                     </form>
                     <div id="user-view">
-                        <table class="zlzkj_table table table-striped table-hover"><%--table-bordered--%>
-                            <thead>
-                            <tr>
-                                <th width="5%"><a href="javascript:void(0)" class="checkall">全选</a></th>
-                                <th width="5%">头像</th>
-                                <th width="10%">用户名称</th>
-                                <th width="10%">角色</th>
-                                <th width="10%">电话</th>
-                                <%--<th width="10%">邮箱</th>--%>
-                                <th width="10%">创建时间</th>
-                                <th width="5%">状态</th>
-                                <th width="10%">操作</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <c:forEach var="v" items="${pageView.page.items}">
-                                <tr data-id="${v.id}" data-name="${v.name}">
-                                    <td><input type="checkbox" name="id" value="${v.id}"></td>
-                                    <td>
-                                        <a class="fancybox" data-fancybox-group="button"
-                                           href="https://gss0.bdstatic.com/70cFsj3f_gcX8t7mm9GUKT-xh_/avatar/100/r7s1g1.gif">
-                                            <img width="30" height="30"
-                                                 src="https://gss0.bdstatic.com/70cFsj3f_gcX8t7mm9GUKT-xh_/avatar/100/r7s1g1.gif"/>
-                                        </a>
-                                    </td>
-                                    <td>${v.name}</td>
-                                    <td>${v.role_name}</td>
-                                    <td>${v.phone}</td>
-                                        <%--<td>${v.email}</td>--%>
-                                    <td><fmt:formatDate value="${v.created_time}" pattern="yyyy/M/dHH:mm"/></td>
-                                    <td>
-                                        <c:if test="${v.is_locked == 0}">
-                                            <span class="tag-success">启用</span>
-                                        </c:if>
-                                        <c:if test="${v.is_locked == 1}">
-                                            <span class="tag-danger">禁用</span>
-                                        </c:if>
-                                    </td>
-                                    <td>
-                                        <button class="editUser btn btn-sm btn-default" data-loading-text="加载中..">
-                                                <%--<i class="fa fa-edit fa-fw"></i>--%>编辑
-                                        </button>
-                                        <button class="deleteUser btn btn-sm btn-default"><%--<i class="fa fa-trash-o fa-fw"></i>--%>删除</button>
-                                    </td>
-                                </tr>
-                            </c:forEach>
-                            <c:if test="${pageView.page.items.size() == 0}">
+                        <form class="ids-form">
+                            <table class="zlzkj_table table table-striped table-hover"><%--table-bordered--%>
+                                <thead>
                                 <tr>
-                                    <td colspan="8" align="center">暂无数据</td>
+                                    <th width="5%"><a href="javascript:void(0)" class="checkall">全选</a></th>
+                                    <th width="5%">头像</th>
+                                    <th width="10%">用户名称</th>
+                                    <th width="10%">角色</th>
+                                    <th width="10%">电话</th>
+                                    <%--<th width="10%">邮箱</th>--%>
+                                    <th width="10%">创建时间</th>
+                                    <th width="5%">状态</th>
+                                    <th width="10%">操作</th>
                                 </tr>
-                            </c:if>
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody>
+                                <c:forEach var="v" items="${pageView.page.items}">
+                                    <tr data-id="${v.id}" data-name="${v.name}">
+                                        <td><input type="checkbox" name="id" value="${v.id}"></td>
+                                        <td>
+                                            <a class="fancybox" data-fancybox-group="button"
+                                               href="${z:u('file/openfile')}?filepath=${v.avatar}">
+                                                <img width="30" height="30" src="${z:u('file/openfile')}?filepath=${v.avatar}"
+                                                     onerror="this.src='${__static__}/images/default/default_avatar.gif';
+                                                     this.parentNode.href='${__static__}/images/default/default_avatar.gif'"/>
+                                            </a>
+                                        </td>
+                                        <td>${v.name}</td>
+                                        <td>${v.role_name}</td>
+                                        <td>${v.phone}</td>
+                                            <%--<td>${v.email}</td>--%>
+                                        <td><fmt:formatDate value="${v.created_time}" pattern="yyyy/M/dHH:mm"/></td>
+                                        <td>
+                                            <c:if test="${v.is_locked == 0}">
+                                                <span class="tag-success">启用</span>
+                                            </c:if>
+                                            <c:if test="${v.is_locked == 1}">
+                                                <span class="tag-danger">禁用</span>
+                                            </c:if>
+                                        </td>
+                                        <td>
+                                            <input type="button" class="btn btn-default btn-sm editUser" value="编辑">
+                                            <input type="button" class="btn btn-default btn-sm deleteUser" value="删除">
+                                        </td>
+                                    </tr>
+                                </c:forEach>
+                                <c:if test="${pageView.page.items.size() == 0}">
+                                    <tr>
+                                        <td colspan="8" align="center">暂无数据</td>
+                                    </tr>
+                                </c:if>
+                                </tbody>
+                            </table>
+                        </form>
 
                         <c:set var="page" value="${pageView.getPage() }"></c:set>
                         <div id="page-view">
@@ -148,7 +150,7 @@
         </div>
         <div id="reportview"></div>
 
-        <footer class="text-right zlzkj_footer">
+        <footer class="zlzkj_footer">
             <p>Copyright &copy; HangZhou DingYan Tech
                 | 杭州鼎研科技有限公司版权所有</p>
         </footer>
@@ -183,11 +185,16 @@
 
         //添加点击事件
         initOperation();
+
+
+        $(".searchUser").off("click").on("click", function () {
+            refreshTable(0);
+        });
     });
 
     //刷新数据
     function refreshTable(nowPage) {
-        if(nowPage != 0)
+        if (nowPage != 0)
             $("#search-form [name=nowPage]").val(nowPage);
         $.ajax({
             type: "POST",
@@ -206,7 +213,8 @@
             }
         });
     }
-    function initOperation(){
+
+    function initOperation() {
         $(".createUser").off("click").on("click", function () {
             $.ajax({
                 type: "POST",
@@ -232,18 +240,19 @@
                 }
             });
         });
+
         $(".deleteUser").off("click").on("click", function () {
             var id = $(this).closest("tr").data("id");
             $.confirm({
                 title: '系统提示',
-                content: "确认要删除吗'<font color='#f00'>"+$(this).closest("tr").data("name")+"</font>'？",
+                content: "确认要删除'<font color='#f00'>" + $(this).closest("tr").data("name") + "</font>'吗？",
                 buttons: {
                     ok: {
                         text: '确认',
                         btnClass: 'btn-primary',
-                        action: function(){
-                            $.post("${z:u('user/delete')}", {id: id}, function(data, textStatus, xhr) {
-                                if (data['status'] ==1) {
+                        action: function () {
+                            $.post("${z:u('user/delete')}", {id: id}, function (data, textStatus, xhr) {
+                                if (data > 0) {
                                     refreshTable(0);
                                     noty({
                                         dismissQueue: true,
@@ -254,7 +263,7 @@
                                         text: '删除成功',
                                         type: 'success'
                                     });
-                                }else{
+                                } else {
                                     noty({
                                         dismissQueue: true,
                                         force: true,
@@ -271,7 +280,59 @@
                     cancel: {
                         text: '取消',
                         btnClass: 'btn-primary',
-                        action: function(){
+                        action: function () {
+                            // button action.
+                        }
+                    },
+                }
+            });
+        });
+
+        $(".batchDeleteUser").off("click").on("click", function () {
+            var checkbox = $("input[type=checkbox]:checked");
+            if (checkbox.length == 0) return;
+            var content = "";
+            for (var i = 0; i < checkbox.length; i++) {
+                content += "'<font color='#f00'>" + checkbox.eq(i).closest("tr").data("name") + "</font>'&nbsp;";
+            }
+            $.confirm({
+                title: '系统提示',
+                content: "确认要删除" + content + ",这<font color='#f00'>" + checkbox.length + "</font>条数据吗？",
+                buttons: {
+                    ok: {
+                        text: '确认',
+                        btnClass: 'btn-primary',
+                        action: function () {
+                            $.post("${z:u('user/delete')}", $(".ids-form").serialize(), function (data, textStatus, xhr) {
+                                if (data > 0) {
+                                    refreshTable(0);
+                                    noty({
+                                        dismissQueue: true,
+                                        force: true,
+                                        timeout: 1000,
+                                        layout: 'topCenter',
+                                        theme: 'default',
+                                        text: '删除成功',
+                                        type: 'success'
+                                    });
+                                } else {
+                                    noty({
+                                        dismissQueue: true,
+                                        force: true,
+                                        timeout: 1000,
+                                        layout: 'topCenter',
+                                        theme: 'default',
+                                        text: '删除失败',
+                                        type: 'error'
+                                    });
+                                }
+                            });
+                        }
+                    },
+                    cancel: {
+                        text: '取消',
+                        btnClass: 'btn-primary',
+                        action: function () {
                             // button action.
                         }
                     },
@@ -292,20 +353,9 @@
                         type: "post",
                         success: function (data, s, xhr) {
                             if (data == 1) {
-                                /*noty({
-                                    dismissQueue: true,
-                                    force: true,
-                                    timeout: true,
-                                    layout: 'topCenter',
-                                    theme: 'default',
-                                    text: '操作成功',
-                                    type: 'success'
-                                });*/
-
+                                refreshTable(0);
                                 $(".confirm").button('reset');
                                 $("#commonModal").modal('hide');
-                                /*getUser(now_user_page);
-                                refreshTable(now_page);*/
                             }
                         }
                     });
@@ -343,10 +393,10 @@
                     phone: {
                         maxlength: 100,
                         required: true,
-                        confirmPhone:true
+                        confirmPhone: true
                     },
                     email: {
-                        email:true
+                        email: true
                     },
                     description: {
                         maxlength: 100
@@ -494,55 +544,58 @@
 </script>
 
 <script type="text/html" id="userViewTemplate">
-    <table class="zlzkj_table table table-striped table-hover" style="margin-top: 5px"><%--table-bordered--%>
-        <thead>
-        <tr>
-            <th width="5%"><a href="javascript:void(0)" class="checkall">全选</a></th>
-            <th width="5%">头像</th>
-            <th width="10%">用户名称</th>
-            <th width="10%">角色</th>
-            <th width="10%">电话</th>
-            <%--<th width="10%">邮箱</th>--%>
-            <th width="10%">创建时间</th>
-            <th width="5%">状态</th>
-            <th width="18%">操作</th>
-        </tr>
-        </thead>
-        <tbody>
-        {%each(i,v) page.items %}
-        <tr data-id="{%= v.id %}" data-name="{%= v.name%}">
-            <td><input type="checkbox" name="id" value="{%= v.id %}"></td>
-            <td>
-                <a class="fancybox" data-fancybox-group="button"
-                   href="https://gss0.bdstatic.com/70cFsj3f_gcX8t7mm9GUKT-xh_/avatar/100/r7s1g1.gif">
-                    <img width="30" height="30"
-                         src="https://gss0.bdstatic.com/70cFsj3f_gcX8t7mm9GUKT-xh_/avatar/100/r7s1g1.gif"/>
-                </a>
-            </td>
-            <td>{%= v.name%}</td>
-            <td>{%= role_name%}</td>
-            <td>{%= v.phone%}</td>
-            <td>{%= v.created_time%}</td>
-            <td>
-                {%if v.is_locked == 0%}
-                <span class="tag-success">启用</span>
-                {%elseif v.is_locked == 1%}
-                <span class="tag-warning">禁用</span>
-                {%/if%}
-            </td>
-            <td>
-                <button class="btn btn-default btn-sm editUser"><%--<i class="fa fa-edit fa-fw"></i>--%>编辑</button>
-                <button class="btn btn-default btn-sm deleteUser"><%--<i class="fa fa-trash-o fa-fw"></i>--%>删除</button>
-            </td>
-        </tr>
-        {%/each%}
-        {%if page.items.length == 0%}
-        <tr>
-            <td colspan="8" align="center">暂无数据</td>
-        </tr>
-        {%/if%}
-        </tbody>
-    </table>
+    <form class="ids-form">
+
+        <table class="zlzkj_table table table-striped table-hover" style="margin-top: 5px"><%--table-bordered--%>
+            <thead>
+            <tr>
+                <th width="5%"><a href="javascript:void(0)" class="checkall">全选</a></th>
+                <th width="5%">头像</th>
+                <th width="10%">用户名称</th>
+                <th width="10%">角色</th>
+                <th width="10%">电话</th>
+                <%--<th width="10%">邮箱</th>--%>
+                <th width="10%">创建时间</th>
+                <th width="5%">状态</th>
+                <th width="18%">操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            {%each(i,v) page.items %}
+            <tr data-id="{%= v.id %}" data-name="{%= v.name%}">
+                <td><input type="checkbox" name="id" value="{%= v.id %}"></td>
+                <td>
+                    <a class="fancybox" data-fancybox-group="button"
+                       href="https://gss0.bdstatic.com/70cFsj3f_gcX8t7mm9GUKT-xh_/avatar/100/r7s1g1.gif">
+                        <img width="30" height="30"
+                             src="https://gss0.bdstatic.com/70cFsj3f_gcX8t7mm9GUKT-xh_/avatar/100/r7s1g1.gif"/>
+                    </a>
+                </td>
+                <td>{%= v.name%}</td>
+                <td>{%= role_name%}</td>
+                <td>{%= v.phone%}</td>
+                <td>{%= v.created_time%}</td>
+                <td>
+                    {%if v.is_locked == 0%}
+                    <span class="tag-success">启用</span>
+                    {%elseif v.is_locked == 1%}
+                    <span class="tag-warning">禁用</span>
+                    {%/if%}
+                </td>
+                <td>
+                    <input type="button" class="btn btn-default btn-sm editUser" value="编辑">
+                    <input type="button" class="btn btn-default btn-sm deleteUser" value="删除">
+                </td>
+            </tr>
+            {%/each%}
+            {%if page.items.length == 0%}
+            <tr>
+                <td colspan="8" align="center">暂无数据</td>
+            </tr>
+            {%/if%}
+            </tbody>
+        </table>
+    </form>
 
     {%if page.totalPage != 1 %}
     <nav class="zlzkj_pagination">
