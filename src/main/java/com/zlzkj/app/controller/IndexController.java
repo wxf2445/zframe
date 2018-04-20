@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 //import org.json.JSONObject;
 import com.alibaba.fastjson.JSONObject;
 import com.google.code.kaptcha.Constants;
+import com.zlzkj.app.service.ShiroUserService;
 import com.zlzkj.app.util.Md5Util;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
@@ -34,6 +35,8 @@ public class IndexController extends BaseController{
 
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private ShiroUserService shiroUserService;
 
 	@RequestMapping(value={"/"})
 	public String login(Model model,HttpServletRequest request,HttpServletResponse response) {
@@ -86,6 +89,8 @@ public class IndexController extends BaseController{
 		}
 		try {
 			user.login(token);
+
+			session.setAttribute("CUR_USER",shiroUserService.getLoginUser());
 			System.out.println("Login success!");
 		} catch (AuthenticationException e) {
 			redirectAttributes.addFlashAttribute("errors", "account_or_password_error");

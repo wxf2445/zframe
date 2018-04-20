@@ -7,7 +7,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title></title>
+    <title>鼎研WMS仓储管理系统登录</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -15,6 +15,8 @@
     <link rel="stylesheet" href="${__static__}/js/fancybox/source/jquery.fancybox.css?v=2.1.2"/>
     <link rel="stylesheet" href="${__static__}/js/fancybox/source/helpers/jquery.fancybox-buttons.css?v=1.0.5"/>
     <link rel="stylesheet" href="${__static__}/js/fancybox/source/helpers/jquery.fancybox-thumbs.css?v=1.0.7"/>
+
+    <link rel="stylesheet" href="${__static__}/css/confirm/jquery-confirm.css"/>
 </head>
 
 <body>
@@ -23,7 +25,7 @@
         <div class="templatemo-content-widget no-padding">
             <div class="zlzkj_item_content table-responsive">
                 <div class="modal-header">
-                    <div class="text-info" style="font-size: 15px"><p>人员管理</p></div>
+                    <div class="text-info"><p>人员管理</p></div>
                 </div>
                 <div class="col-sm-12">
                     <form id="search-form">
@@ -67,10 +69,10 @@
                                         <td><input type="checkbox" name="id" value="${v.id}"></td>
                                         <td>
                                             <a class="fancybox" data-fancybox-group="button"
-                                               href="${z:u('file/openfile')}?filepath=${v.avatar}">
-                                                <img width="30" height="30" src="${z:u('file/openfile')}?filepath=${v.avatar}"
-                                                     onerror="this.src='${__static__}/images/default/default_avatar.gif';
-                                                     this.parentNode.href='${__static__}/images/default/default_avatar.gif'"/>
+                                               href="${z:u('file/openfile')}?filepath=${v.avatar==null?'default/default.jpg':v.avatar}">
+                                                <img width="30" height="30" src="${z:u('file/openfile')}?filepath=${v.avatar==null?'default/default.jpg':v.avatar}"
+                                                     onerror="this.src='${__static__}/images/default/default.jpg';
+                                                     this.parentNode.href='${__static__}/images/default/default.jpg'"/>
                                             </a>
                                         </td>
                                         <td>${v.name}</td>
@@ -161,7 +163,7 @@
 <script src="${__static__}/js/jquery.tmpl.js"></script>
 <script src="${__static__}/js/jquery.validate.js"></script>
 <script src="${__static__}/js/bootstrap.min.js"></script>
-<script src="${__static__}/js/bootstrap-datetimepicker.js"></script>
+<%--<script src="${__static__}/js/bootstrap-datetimepicker.js"></script>--%>
 <script src="${__static__}/js/jquery-form.js"></script>
 
 
@@ -169,7 +171,6 @@
 <script src='${__static__}/js/noty/layouts/topCenter.js'></script>
 <script src='${__static__}/js/noty/themes/default.js'></script>
 
-<link rel="stylesheet" href="${__static__}/css/confirm/jquery-confirm.css"/>
 <script src="${__static__}/js/confirm/jquery-confirm.js"></script>
 <%-- image show --%>
 <script src="${__static__}/js/fancybox/source/jquery.fancybox.js?v=2.1.3"></script>
@@ -185,6 +186,9 @@
 
         //添加点击事件
         initOperation();
+
+        //header 用户下拉重新
+        $('.dropdown-toggle').dropdown();
 
 
         $(".searchUser").off("click").on("click", function () {
@@ -341,7 +345,7 @@
         });
     }
 
-
+    //用户表单验证
     function userFormValidate() {
         $("#commonModal").modal('show');
         $('#user-form').validate(
@@ -428,7 +432,7 @@
                 }
             });
 
-        $('[name=startTime]').datetimepicker({
+        /*$('[name=startTime]').datetimepicker({
             format: 'yyyy-mm-dd',
             language: 'zh',
             weekStart: 1,
@@ -438,19 +442,7 @@
             startView: 2,
             minView: 3,
             forceParse: 0
-        });
-
-        $('[name=endTime]').datetimepicker({
-            format: 'yyyy-mm-dd',
-            language: 'zh',
-            weekStart: 1,
-            todayBtn: 1,
-            autoclose: 1,
-            todayHighlight: 1,
-            startView: 2,
-            minView: 3,
-            forceParse: 0
-        });
+        });*/
     }
 
 </script>
@@ -566,9 +558,9 @@
                 <td><input type="checkbox" name="id" value="{%= v.id %}"></td>
                 <td>
                     <a class="fancybox" data-fancybox-group="button"
-                       href="https://gss0.bdstatic.com/70cFsj3f_gcX8t7mm9GUKT-xh_/avatar/100/r7s1g1.gif">
-                        <img width="30" height="30"
-                             src="https://gss0.bdstatic.com/70cFsj3f_gcX8t7mm9GUKT-xh_/avatar/100/r7s1g1.gif"/>
+                       href="${z:u('file/openfile')}?filepath={%= v.avatar==null?'default/default.jpg':''%}">
+                        <img width="30" height="30" src="${z:u('file/openfile')}?filepath={%= v.avatar==null?'default/default.jpg':''%}"
+                             onerror="this.src='${__static__}/images/default/default.jpg';this.parentNode.href='${__static__}/images/default/default.jpg'"/>
                     </a>
                 </td>
                 <td>{%= v.name%}</td>

@@ -113,15 +113,17 @@ public class UserController extends BaseController {
 
     }
 
-    @RequestMapping(value = {"upload/image"})
-    public String fileUpload(Model model, HttpServletRequest request, HttpServletResponse response, HttpSession session, @RequestParam MultipartFile file) throws IOException {
+    @RequestMapping(value = {"update_image"})
+    public String fileUpload(Model model, HttpServletRequest request, HttpServletResponse response, HttpSession session,User user, @RequestParam MultipartFile file) throws IOException {
 
-        User user = shiroUserService.getLoginUser();
+        User curUser = shiroUserService.getLoginUser();
+
+        if (!user.getId().equals(curUser.getId()))
+            return ajaxReturn(response, -1);
 
         File f = new File(FILE_REPOSITORY + user.getId());
         if (!f.exists()) {
             f.mkdirs();
-            //+"/"+
         }
         FileOutputStream fos;
         String fileName = "";
@@ -129,7 +131,6 @@ public class UserController extends BaseController {
             InputStream is = file.getInputStream();
             fileName = user.getId() + "/" + System.currentTimeMillis() + ".png";
             fos = new FileOutputStream(FILE_REPOSITORY + fileName);
-
 
             byte[] b = new byte[1024];
 
@@ -140,9 +141,8 @@ public class UserController extends BaseController {
             is.close();
             fos.close();
 
-            User upUser = userService.findById(user.getId());
-            upUser.setAvatar(fileName);
-            userService.update(upUser);
+            curUser.setAvatar(fileName);
+            session.setAttribute("CUR_USER",curUser);
         } catch (FileNotFoundException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();

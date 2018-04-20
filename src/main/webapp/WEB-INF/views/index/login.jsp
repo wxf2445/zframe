@@ -3,7 +3,7 @@
 <%@ taglib uri="http://zlzkj.com/tags" prefix="z" %>
 <html>
 <head>
-    <title>zlzkj</title>
+    <title>鼎研WMS仓储管理系统登录</title>
     <link href="${__static__}/css/skin/font-awesome.css" rel="stylesheet">
     <link href="${__static__}/css/bootstrap.min.css" rel="stylesheet">
     <link href="${__static__}/css/templatemo-style.css" rel="stylesheet">
@@ -13,14 +13,6 @@
         function reloadValidateCode() {
             $("#validateCodeImg").attr("src", "Kaptcha.jpg?" + new Date() + Math.floor(Math.random() * 24));
         }
-
-        /* $.post("{z:u('delete/user')}", {userId: userId}, function (result) {
-             if (result.data > 0) {
-                 alert("操作成功");
-                 //getTest();
-                 $(this_).parent().parent().remove();
-             }
-         }, "json");*/
     </script>
     <style>
         .submit-code-div {
@@ -45,7 +37,7 @@
     </style>
 </head>
 <body class="light-gray-bg">
-<div class="templatemo-content-widget templatemo-login-widget white-bg">
+<div class="templatemo-login-widget white-bg">
     <header class="text-center">
         <h1><img src="${__static__}/images/skin/small_logo.png" width="30" height="30" style="margin-top: -5px">&nbsp;鼎研WMS仓储管理系统登录</h1>
     </header>

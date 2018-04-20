@@ -37,17 +37,17 @@
 	</bean>
 
 	<!-- 支持文件上传 -->
-	<!-- <bean id="multipartResolver" class="com.zlzkj.core.base.MyMultipartResolver">
+	 <bean id="multipartResolver" class="com.zlzkj.core.base.MyMultipartResolver">
 		<property name="defaultEncoding" value="utf-8"></property>	
-		设置上传文件的最大尺寸
+		<!--设置上传文件的最大尺寸-->
 		<property name="maxUploadSize" value="1024000000"></property>
 		<property name="excludeUrl">  
             <list>  
-              如果请求中包含以下路径，则不进行拦截  
+              <!--如果请求中包含以下路径，则不进行拦截 -->
               <value>/vod/upload/flash</value>
             </list>  
        	</property> 
-	</bean> -->
+	</bean>
 
 	<!-- Enable Shiro Annotations for Spring-configured beans.  Only run after
          the lifecycleBeanProcessor has run: -->

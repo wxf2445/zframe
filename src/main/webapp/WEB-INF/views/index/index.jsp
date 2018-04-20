@@ -119,24 +119,10 @@
             <a href="${z:u('logout')}">注销登录</a>
         </div>
     </div>
-
-<div class="modal fade" id="commonModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-     aria-hidden="true">
-    <div class="modal-dialog" style="width:800px;">
-        <div class="modal-content">
-
-        </div>
-    </div>
-</div>
 <!-- JS -->
 <script src="${__static__}/js/bootstrap.min.js"></script>
-<%--<script src='${__static__}/js/noty/jquery.noty.js'></script>
-<script src='${__static__}/js/noty/layouts/topCenter.js'></script>
-<script src='${__static__}/js/noty/themes/default.js'></script>--%>
 <script src='${__static__}/js/skin/jquery-accordion-menu.js'></script>
 
-<script type="text/javascript"
-        src="http://api.map.baidu.com/api?v=2.0&ak=6vxe6wNIoVzqpbyAmGxYUkiobfmSyWs8"></script>
 <script type="text/javascript">
     $(function () {
 
@@ -147,7 +133,6 @@
             $(this).addClass("active");
             var tar_href = $(this).attr("tar-href");
             $(".zlzkj_content").load(tar_href,function(){
-
                 $("#content").load(tar_href+" #content",function(result){
                     $result = $(result);
                     $result.find("script").appendTo('#content');
@@ -157,137 +142,6 @@
 
         //$(".jquery-accordion-menu").load($(".jquery-accordion-menu li a.active").attr("tar-href"));
     });
-
-    function updateUser() {
-        $.ajax({
-            type: "POST",
-            url: "${z:u('user/detail')}",
-            data: {id: '${user.id}'},
-            success: function (result) {
-                if (result == '') return;
-                result = result.result;
-                $("#commonModal .modal-content").html($("#userTemplate").tmpl({obj: result}));
-                userFormValidate();
-            }
-        });
-    }
-
-    function userFormValidate() {
-
-        $("#commonModal").modal('show');
-        $('#user-form').validate(
-            {
-                submitHandler: function (form) {
-                    $(form).ajaxSubmit({
-                        dataType: "json",
-                        type: "post",
-                        success: function (data, s, xhr) {
-                            if (data.status == 1) {
-                                noty({
-                                    dismissQueue: true,
-                                    force: true,
-                                    timeout: true,
-                                    layout: 'topCenter',
-                                    theme: 'default',
-                                    text: '操作成功',
-                                    type: 'success'
-                                });
-
-                                $(".username").html(data.data);
-
-                                $("#commonModal").modal('hide');
-                                getTable(now_page);
-                            }
-                        }
-                    });
-                },
-                errorPlacement: function (error, element) {
-                    error.replaceAll($(element).next());
-                },
-                rules: {
-                    name: {
-                        maxlength: 20,
-                        required: true
-                    },
-                    phone: {
-                        maxlength: 20
-                    },
-                    email: {
-                        maxlength: 50
-                    },
-                    address: {
-                        maxlength: 255
-                    },
-                    memo: {
-                        maxlength: 100,
-                    }
-                },
-                messages: {
-                    name: {
-                        required: "必填！"
-                    },
-                },
-                success: function (label) {
-                    label.hide();
-                }
-            });
-    }
-</script>
-
-<script type="text/html" id="userTemplate">
-    <form id="user-form" method="post" class="form-horizontal" role="form"
-          action="${z:u('user/update')}">
-        <input name="id" type="hidden" value="{%= obj.id %}">
-        <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">×</button>
-            <h4 class="head">修改个人信息</h4>
-        </div>
-        <div class="modal-body">
-            <div class="form-group col-sm-10 " style="border:none">
-                <label class="col-sm-2 control-label">名称：</label>
-                <div class="col-sm-4">
-                    <input name="name" class="form-control" value="{%= obj.name %}">
-                    <label id="name-error" class="control-label"></label>
-                </div>
-
-                <label class="col-sm-2 control-label">联系电话：</label>
-                <div class="col-sm-4">
-                    <input type="text" name="phone" class="form-control" value="{%= obj.phone %}"/>
-                    <label id="phone-error" class="control-label"></label>
-                </div>
-            </div>
-            <div class="form-group col-sm-10 " style="border:none">
-                <label class="col-sm-2 control-label">邮箱：</label>
-                <div class="col-sm-4">
-                    <input name="email" class="form-control" value="{%= obj.email %}">
-                    <label id="email-error" class="control-label"></label>
-                </div>
-
-                <label class="col-sm-2 control-label">住址：</label>
-                <div class="col-sm-4">
-                    <input type="text" name="address" class="form-control" value="{%= obj.address %}"/>
-                    <label id="address-error" class="control-label"></label>
-                </div>
-            </div>
-
-            <div class="form-group col-sm-10 " style="border:none">
-                <label class="col-sm-2 control-label">备注：</label>
-                <div class="col-sm-10">
-                    <textarea class="form-control" name="memo" style="height:120px;">{%= obj.memo %}</textarea>
-                    <label id="memo-error" class="control-label"></label>
-                </div>
-            </div>
-        </div>
-        <div style="clear: both;"></div>
-        <div class="modal-footer">
-            <a class="btn btn-primary confirm btn-sm" onclick="$('#user-form').submit()"><strong><i
-                    class="glyphicon glyphicon-ok"></i> <span
-                    class="btntext">确定</span></strong></a>
-            <a class="btn btn-primary cancel btn-sm"
-               data-dismiss="modal"><strong><i class="glyphicon glyphicon-share-alt"></i> <span
-                    class="btntext">取消</span></strong></a>
-        </div>
-    </form>
 </script>
 </body>
 </html>

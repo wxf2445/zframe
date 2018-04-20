@@ -39,7 +39,8 @@ public class FileController extends BaseController {
 		response.setHeader("Access-Control-Allow-Origin", "*");
 
 	    File file = new File(FILE_REPOSITORY + filepath);
-	    try{
+        //System.out.println(FILE_REPOSITORY + filepath);
+        try{
             FileInputStream in = new FileInputStream(file);
             OutputStream o = response.getOutputStream();
             response.setHeader("Content-Disposition","attachment;filename=" + file.getName());
@@ -59,7 +60,7 @@ public class FileController extends BaseController {
             o.flush();
             o.close();
         }catch (IOException e){
-
+            e.printStackTrace();
         }
 
     }
